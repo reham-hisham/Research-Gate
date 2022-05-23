@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Session["ID"] != null)
+{
+    {
+        @Html.AntiForgeryToken()
+       
+        <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @Html.ActionLink("Hello  " + Session["AutherName"] + "! ", "Index", "Home")
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">@Html.ActionLink("Logout", "Logout", "Auther", routeValues: null, htmlAttributes: new { id = "registerLink" })</a>
+                <a class="dropdown-item" href="#">@Html.ActionLink("Edit Account", "Edit", "Auther", routeValues: null, htmlAttributes: new { })</a>
+       
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item " href="#">@Html.ActionLink("Delete", "DeleteAcount", "Auther", routeValues: null, htmlAttributes: new { })</a>
+            </div>
+        </div>
+
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Auther", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Auther", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

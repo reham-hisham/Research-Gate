@@ -1,0 +1,47 @@
+﻿@model IEnumerable<IAproject.ViewModel.PaperAuthors>
+
+@{
+    ViewBag.Title = "show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>show</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.auther)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paper)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.auther)
+            <ul>
+                @foreach (var book in item.auther)
+                {
+                    <li>
+                        @book.FirstName
+                    </li>
+                }
+            </ul>
+
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paper)
+        </td>
+       
+    </tr>
+    }
+
+</table>

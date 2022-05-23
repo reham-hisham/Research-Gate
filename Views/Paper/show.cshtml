@@ -1,0 +1,113 @@
+﻿@model IEnumerable<IAproject.ViewModel.PaperAuthors>
+@{
+    ViewBag.Title = "show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>show</h1>
+<button class="button">
+    @Html.ActionLink("Create New", "AddPaper")
+    </button>
+    <table style="color:gray">
+
+
+        @foreach (var item in Model)
+        {
+
+            <div class="card ">
+                <ul>
+
+                    <h2 style=" color:darkseagreen">
+                        @Html.DisplayNameFor(model => model.auther)
+                    </h2>
+                    <h4>
+                        @foreach (var Auther in item.auther)
+                        {
+
+                            @Html.ActionLink(@Auther.FirstName, "ShowAutherProfile", "Auther", new { id = Auther.Id }, null)
+                            <br />
+
+
+                        }
+                    </h4>
+                </ul>
+
+
+                <ul>
+                    <h2 style="color:darkseagreen">
+                        @Html.DisplayNameFor(model => model.paper)
+                    </h2>
+                    <h3>Title</h3>
+                    @Html.ActionLink(item.paper.Title, "ShowOnePaper", new { id = Guid.Parse(item.paper.id.ToString()) }, null) |
+
+                    <h3>Content</h3>
+                    @Html.DisplayFor(modelItem => item.paper.Content)
+                </ul>
+                <h2>---------------------------------------------</h2>
+                <ul>
+                    @Html.ActionLink("Like", "AddLike", new { id = Guid.Parse(item.paper.id.ToString()) }, null) |
+                    @Html.ActionLink("AddDisLike", "AddDisLike", new { id = Guid.Parse(item.paper.id.ToString()) }, null)
+
+                    @using (Html.BeginForm("addComment", "Paper", new { Id = Guid.Parse(item.paper.id.ToString()) }))
+                    {
+
+                        @Html.TextBox("Comment", "")
+                       
+                        <br />
+                        <input type="submit" value="Submit TextBox" />
+
+                    }
+
+
+
+
+
+                </ul>
+
+            </div>
+
+
+
+
+        }
+    </table>
+
+
+
+
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+]        <style>
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                transition: 0.3s;
+                width: 40%;
+                background-color:antiquewhite;
+            }
+
+                .card:hover {
+                    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+                }
+
+            .container {
+                padding: 3px 20px;
+            }
+            .button {
+                background-color:bisque;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+            } 
+            
+        </style>
+    </head>
+
+</html>
